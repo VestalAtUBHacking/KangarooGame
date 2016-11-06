@@ -4,6 +4,7 @@ from utilities import load_png
 class Boomerang(pygame.sprite.Sprite):
     """A boomerang that will move in a parabolic arc
     and return to the thrower"""
+    #Hey that's pretty good
     def __init__(self, speed, x, y, roo):
         self.x = x
         self.y = y

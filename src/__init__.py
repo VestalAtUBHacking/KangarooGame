@@ -21,12 +21,14 @@ global player2
 gondola = gondola()
 gondolasprite = pygame.sprite.RenderPlain(gondola)
 
-speed = 50
+speed = 1
 boomerang = Boomerang(speed, 50, 360)
+boomerangTwo = Boomerang(-speed, 1230, 360)
 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
+boomerangTwoSprite = pygame.sprite.RenderPlain(boomerangTwo)
 
 player1 = kangaroo("left", boomerang)
-player2 = kangaroo("right", boomerang)
+player2 = kangaroo("right", boomerangTwo)
 
 
 
@@ -72,6 +74,12 @@ while not done:
                 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
                 boomerangsprite.update()
                 boomerangsprite.draw(screen)
+            if event.key == pygame.K_RSHIFT and boomerangTwo.reversed and boomerangTwo.orignalx == boomerangTwo.rect.x and player2.canShootAgain:
+                boomerangTwo = Boomerang(speed, player2.rect.centerx, player2.rect.centery)
+                player2.canShootAgain = False
+                boomerangTwoSprite = pygame.sprite.RenderPlain(boomerangTwo)
+                boomerangTwoSprite.update()
+                boomerangTwoSprite.draw(screen)
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_a or event.key == pygame.K_d:
                 player1.movepos = [0,0]
@@ -82,15 +90,17 @@ while not done:
 
     screen.blit(backGround.image, backGround.rect)
     screen.blit(background, boomerang.rect, boomerang.rect, pygame.BLEND_ADD)
+    screen.blit(background, boomerangTwo.rect, boomerangTwo.rect, pygame.BLEND_ADD)
     screen.blit(background, player1.rect, player1.rect, pygame.BLEND_ADD)
     screen.blit(background, player2.rect, player2.rect, pygame.BLEND_ADD)
     gondolasprite.update()
     playersprites.update()
     boomerangsprite.update()
+    boomerangTwoSprite.update()
+    boomerangTwoSprite.draw(screen)
     boomerangsprite.draw(screen)
     playersprites.draw(screen)
     gondolasprite.draw(screen)
     pygame.display.flip()
-    print("CAN I SHOOT: " + str(player1.canShootAgain))
 
 if __name__ == '__main__': main()

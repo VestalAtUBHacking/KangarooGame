@@ -18,7 +18,10 @@ class Boomerang(pygame.sprite.Sprite):
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.movepos = [self.x,self.y]
-        self.rect.x = self.x
+        if(self.speed < 1):
+            self.rect.x = 1280 - self.x
+        else:
+            self.rect.x = self.x
         self.rect.y = self.y - 20
 
     def update(self):
@@ -26,14 +29,26 @@ class Boomerang(pygame.sprite.Sprite):
         self.imageCounter = self.imageCounter + 1
         if(self.imageCounter == 3):
             self.imageCounter = 0
-        if self.reversed == True:
-            if self.rect.x == self.orignalx:
-                self.rect.x = self.orignalx
-                self.image = pygame.image.load('../assets/img/boomerangframe-0.png')
+        if(self.speed < 0):
+            if self.reversed == True:
+                if self.rect.x == self.orignalx:
+                    self.rect.x = self.orignalx
+                    self.image = pygame.image.load('../assets/img/boomerangframe-0.png')
+                else:
+                    self.rect.x += 20
             else:
-                self.rect.x -= 20   
+                self.rect.x -= 20
+                if(self.rect.x <= self.orignalx - 640):
+                    self.reversed = True
         else:
-            self.rect.x += 20
-            if(self.rect.x >= self.orignalx + 640):
-                self.reversed = True
+            if self.reversed == True:
+                if self.rect.x == self.orignalx:
+                    self.rect.x = self.orignalx
+                    self.image = pygame.image.load('../assets/img/boomerangframe-0.png')
+                else:
+                    self.rect.x -= 20   
+            else:
+                self.rect.x += 20
+                if(self.rect.x >= self.orignalx + 640):
+                    self.reversed = True
         pygame.event.pump()

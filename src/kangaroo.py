@@ -9,7 +9,7 @@ class kangaroo(pygame.sprite.Sprite):
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.side = side
-        self.speed = 10
+        self.speed = 5
         self.state = "still"
         self.reinit()
 

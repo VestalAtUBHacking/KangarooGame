@@ -20,11 +20,11 @@ global player2
 player1 = kangaroo("left")
 player2 = kangaroo("right")
 
-speed = 5
+speed = 50
 
 playersprites = pygame.sprite.RenderPlain((player1, player2))
 
-boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
+boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery, player1)
 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
 
 
@@ -60,8 +60,8 @@ while not done:
                 player2.moveleft()
             if event.key == pygame.K_RIGHT:
                 player2.moveright()
-            if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x:
-                boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
+            if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x and boomerang.isTouchingOwner:
+                boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery, player1)
                 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
                 boomerangsprite.update()
                 boomerangsprite.draw(screen)
@@ -74,9 +74,9 @@ while not done:
                 player2.state = "still"
 
     screen.blit(backGround.image, backGround.rect)
-    screen.blit(background, boomerang.rect, boomerang.rect)
-    screen.blit(background, player1.rect, player1.rect)
-    screen.blit(background, player2.rect, player2.rect)
+    screen.blit(background, boomerang.rect, boomerang.rect, pygame.BLEND_ADD)
+    screen.blit(background, player1.rect, player1.rect, pygame.BLEND_ADD)
+    screen.blit(background, player2.rect, player2.rect, pygame.BLEND_ADD)
     playersprites.update()
     boomerangsprite.update()
     boomerangsprite.draw(screen)

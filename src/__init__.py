@@ -18,6 +18,7 @@ player2 = kangaroo("right")
 
 playersprites = pygame.sprite.RenderPlain((player1, player2))
 
+<<<<<<< HEAD
 screen.blit(background, (0, 0))
 pygame.display.flip()
 
@@ -25,6 +26,8 @@ clock = pygame.time.Clock()
 
 done = False
 
+=======
+>>>>>>> 95fd1a3afb0f4ed0c8ff7e353abcc303cfec65a8
 #While the game is running
 while not done:
     clock.tick(60)
@@ -53,5 +56,8 @@ while not done:
     playersprites.update()
     playersprites.draw(screen)
     pygame.display.flip()
+<<<<<<< HEAD
 
 if __name__ == '__main__': main()
+=======
+>>>>>>> 95fd1a3afb0f4ed0c8ff7e353abcc303cfec65a8

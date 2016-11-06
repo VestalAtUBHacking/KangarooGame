@@ -33,12 +33,13 @@ boomerangTwo = Boomerang(-speed, 1230, 360)
 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
 boomerangTwoSprite = pygame.sprite.RenderPlain(boomerangTwo)
 
-player1 = kangaroo("left", boomerang,boomerangTwo)
+player1 = kangaroo("left", boomerang, boomerangTwo)
 player2 = kangaroo("right", boomerangTwo, boomerang)
 
 
 
-playersprites = pygame.sprite.RenderPlain((player1, player2))
+playerspriteOne = pygame.sprite.RenderPlain(player1)
+playerspriteTwo = pygame.sprite.RenderPlain(player2)
 
 
 screen.blit(background, (0, 0))
@@ -107,8 +108,10 @@ while not done:
         scorePlayerTwo = scorePlayerTwo + 1
         label = myfont.render("Player One has died!", 1, (255,0,0))
         screen.blit(label, (360, 0))
-        playersprites.update()
-        playersprites.draw(screen)
+        playerspriteOne.update()
+        playerspriteOne.draw(screen)
+        playerspriteTwo.update()
+        playerspriteTwo.draw(screen)
         player1.dead = False
         player2.dead = False
         player1.rect.midleft = player1.area.midleft
@@ -122,8 +125,10 @@ while not done:
         screen.blit(label, (360, 20))
         player1.dead = False
         player2.dead = False
-        playersprites.update()
-        playersprites.draw(screen)
+        playerspriteOne.update()
+        playerspriteOne.draw(screen)
+        playerspriteTwo.update()
+        playerspriteTwo.draw(screen)
         player1.rect.midleft = player1.area.midleft
         player2.rect.midright = player2.area.midright
         restartLabel = titleFont.render("RESTARTING! GET READY!", 1, (255,0,0))
@@ -134,13 +139,15 @@ while not done:
         screen.blit(thx, (300, 600))
         done = True
     gondolasprite.update()
-    playersprites.update()
+    playerspriteOne.update()
+    playerspriteTwo.update()
     boomerangsprite.update()
     boomerangTwoSprite.update()
     boomerangTwoSprite.draw(screen)
     boomerangsprite.draw(screen)
     gondolasprite.draw(screen)
-    playersprites.draw(screen)
+    playerspriteOne.draw(screen)
+    playerspriteTwo.draw(screen)
     pygame.display.flip()
 
 if __name__ == '__main__': main()

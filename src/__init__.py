@@ -3,6 +3,7 @@ from kangaroo import kangaroo
 from boomerang import Boomerang
 from gondola import gondola
 from background import Background
+from easygui import msgbox
 
 pygame.init()
 #Sets up the screen
@@ -12,6 +13,11 @@ pygame.display.set_caption('Kangaroo Game')
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((0, 0, 0))
+scorePlayerOne = 0
+scorePlayerTwo = 0
+
+myfont = pygame.font.SysFont("monospace", 15)
+titleFont = pygame.font.SysFont("monospace", 50)
 
 backGround = Background('../assets/img/background.png')
 
@@ -27,8 +33,8 @@ boomerangTwo = Boomerang(-speed, 1230, 360)
 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
 boomerangTwoSprite = pygame.sprite.RenderPlain(boomerangTwo)
 
-player1 = kangaroo("left", boomerang)
-player2 = kangaroo("right", boomerangTwo)
+player1 = kangaroo("left", boomerang,boomerangTwo)
+player2 = kangaroo("right", boomerangTwo, boomerang)
 
 
 
@@ -93,14 +99,48 @@ while not done:
     screen.blit(background, boomerangTwo.rect, boomerangTwo.rect, pygame.BLEND_ADD)
     screen.blit(background, player1.rect, player1.rect, pygame.BLEND_ADD)
     screen.blit(background, player2.rect, player2.rect, pygame.BLEND_ADD)
+    labelOne = myfont.render("Player One Score: " + str(scorePlayerOne), 1, (255,0,0))
+    screen.blit(labelOne, (40, 0))
+    labelTwo = myfont.render("Player Two Score: " + str(scorePlayerTwo), 1, (255,0,0))
+    screen.blit(labelTwo, (40, 20))
+    if(player1.dead == True):
+        scorePlayerTwo = scorePlayerTwo + 1
+        label = myfont.render("Player One has died!", 1, (255,0,0))
+        screen.blit(label, (360, 0))
+        playersprites.update()
+        playersprites.draw(screen)
+        player1.dead = False
+        player2.dead = False
+        player1.rect.midleft = player1.area.midleft
+        player2.rect.midright = player2.area.midright
+        restartLabel = titleFont.render("RESTARTING! GET READY!", 1, (255,0,0))
+        screen.blit(restartLabel, (300, 360))
+        pygame.time.delay(1000)
+    if(player2.dead == True):
+        scorePlayerOne = scorePlayerOne + 1
+        label = myfont.render("Player Two has died!", 1, (255,0,0))
+        screen.blit(label, (360, 20))
+        player1.dead = False
+        player2.dead = False
+        playersprites.update()
+        playersprites.draw(screen)
+        player1.rect.midleft = player1.area.midleft
+        player2.rect.midright = player2.area.midright
+        restartLabel = titleFont.render("RESTARTING! GET READY!", 1, (255,0,0))
+        screen.blit(restartLabel, (300, 360))
+    if(scorePlayerOne >= 5 or scorePlayerTwo >= 5):
+        msgbox("THANKS FOR PLAYING")
+        thx = titleFont.render("THANKS FOR PLAYING!", 1, (255, 0, 0))
+        screen.blit(thx, (300, 600))
+        done = True
     gondolasprite.update()
     playersprites.update()
     boomerangsprite.update()
     boomerangTwoSprite.update()
     boomerangTwoSprite.draw(screen)
     boomerangsprite.draw(screen)
-    playersprites.draw(screen)
     gondolasprite.draw(screen)
+    playersprites.draw(screen)
     pygame.display.flip()
 
 if __name__ == '__main__': main()

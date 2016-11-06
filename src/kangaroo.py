@@ -3,7 +3,7 @@ from utilities import load_png
 
 class kangaroo(pygame.sprite.Sprite):
     
-    def __init__(self, side, boomerang):
+    def __init__(self, side, boomerang, enemyBoom):
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = load_png('../assets/img/Kangaroo.png')
         screen = pygame.display.get_surface()
@@ -15,7 +15,9 @@ class kangaroo(pygame.sprite.Sprite):
         self.imageCounter = 0
         self.canShootAgain = False
         self.boom = boomerang
+        self.enemyBoom = enemyBoom
         self.counter = 10
+        self.dead = False
 
     def reinit(self):
         self.state = "still"
@@ -26,6 +28,9 @@ class kangaroo(pygame.sprite.Sprite):
             self.rect.midright = self.area.midright
 
     def update(self):
+        if self.rect.colliderect(self.enemyBoom.rect):
+            self.dead = True
+            print("PLAYER DEAD")
         self.counter = self.counter + 1
         self.image = pygame.image.load("../assets/img/kangaroo-frame-" + str(self.imageCounter) + ".png")
         if self.counter % 10 == 0:

@@ -12,8 +12,10 @@ class kangaroo(pygame.sprite.Sprite):
         self.speed = 5
         self.state = "still"
         self.reinit()
+        self.imageCounter = 0
         self.canShootAgain = False
         self.boom = boomerang
+        self.counter = 10
 
     def reinit(self):
         self.state = "still"
@@ -24,6 +26,12 @@ class kangaroo(pygame.sprite.Sprite):
             self.rect.midright = self.area.midright
 
     def update(self):
+        self.counter = self.counter + 1
+        self.image = pygame.image.load("../assets/img/kangaroo-frame-" + str(self.imageCounter) + ".png")
+        if self.counter % 10 == 0:
+            self.imageCounter = self.imageCounter + 1
+        if(self.imageCounter == 4):
+            self.imageCounter = 0
         newpos = self.rect.move(self.movepos)
         if self.area.contains(newpos):
             self.rect = newpos

@@ -1,6 +1,7 @@
 import pygame
 from kangaroo import kangaroo
 from boomerang import Boomerang
+from gondola import gondola
 from background import Background
 
 pygame.init()
@@ -16,6 +17,9 @@ backGround = Background('../assets/img/background.png')
 
 global player1
 global player2
+
+gondola = gondola()
+gondolasprite = pygame.sprite.RenderPlain(gondola)
 
 speed = 50
 boomerang = Boomerang(speed, 50, 360)
@@ -79,10 +83,12 @@ while not done:
     screen.blit(background, boomerang.rect, boomerang.rect, pygame.BLEND_ADD)
     screen.blit(background, player1.rect, player1.rect, pygame.BLEND_ADD)
     screen.blit(background, player2.rect, player2.rect, pygame.BLEND_ADD)
+    gondolasprite.update()
     playersprites.update()
     boomerangsprite.update()
     boomerangsprite.draw(screen)
     playersprites.draw(screen)
+    gondolasprite.draw(screen)
     pygame.display.flip()
     print("CAN I SHOOT: " + str(player1.canShootAgain))
 

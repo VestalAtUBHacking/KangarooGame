@@ -7,6 +7,7 @@ class Boomerang(pygame.sprite.Sprite):
     #Hey that's pretty good
     def __init__(self, speed, x, y):
         self.x = x
+        self.imageCounter = 0
         self.y = y
         self.orignalx = x
         self.orignaly = y
@@ -20,10 +21,15 @@ class Boomerang(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y - 20
 
-    def update(self):        
+    def update(self):
+        self.image = pygame.image.load("../assets/img/boomerangframe-" + str(self.imageCounter) + ".png")
+        self.imageCounter = self.imageCounter + 1
+        if(self.imageCounter == 3):
+            self.imageCounter = 0
         if self.reversed == True:
             if self.rect.x == self.orignalx:
                 self.rect.x = self.orignalx
+                self.image = pygame.image.load('../assets/img/boomerangframe-0.png')
             else:
                 self.rect.x -= 20   
         else:

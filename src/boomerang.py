@@ -4,7 +4,6 @@ from utilities import load_png
 class Boomerang(pygame.sprite.Sprite):
     """A boomerang that will move in a parabolic arc
     and return to the thrower"""
-<<<<<<< HEAD
     def __init__(self, (xy), vector):
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = load_png('../assets/img/Boomerang.gif')
@@ -20,7 +19,7 @@ class Boomerang(pygame.sprite.Sprite):
         (angle,z) = vector
         (dx,dy) = (z*math.cos(angle),z*math.sin(angle))
         return rect.move(dx,dy)
-=======
+
     def __init__(self, vector):
 		pygame.sprite.Sprite.__init__(self)
 		self.image, self.rect = load_png('../assets/img/boomerang.png')
@@ -36,4 +35,3 @@ class Boomerang(pygame.sprite.Sprite):
 		(angle,z) = vector
 		(dx,dy) = (z*math.cos(angle),z*math.sin(angle))
 		return rect.move(dx,dy)
->>>>>>> 30ccb59cfda599d3d6b42f8c0b35eb758d1d9f95

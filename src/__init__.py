@@ -33,21 +33,31 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_w:
                 player1.moveup()
-            if event.key == pygame.K_z:
+            if event.key == pygame.K_s:
                 player1.movedown()
+            if event.key == pygame.K_a:
+                player1.moveleft()
+            if event.key == pygame.K_d:
+                player1.moveright()
             if event.key == pygame.K_UP:
                 player2.moveup()
             if event.key == pygame.K_DOWN:
                 player2.movedown()
+            if event.key == pygame.K_LEFT:
+                player2.moveleft()
+            if event.key == pygame.K_RIGHT:
+                player2.moveright()
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_a or event.key == pygame.K_z:
+            if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_a or event.key == pygame.K_d:
                 player1.movepos = [0,0]
                 player1.state = "still"
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 player2.movepos = [0,0]
                 player2.state = "still"
+
+
     screen.blit(background, player1.rect, player1.rect)
     screen.blit(background, player2.rect, player2.rect)
     playersprites.update()

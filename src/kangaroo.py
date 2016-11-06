@@ -34,3 +34,11 @@ class kangaroo(pygame.sprite.Sprite):
     def movedown(self):
         self.movepos[1] = self.movepos[1] + (self.speed)
         self.state = "movedown"
+
+    def moveleft(self):
+        self.movepos[0] = self.movepos[0] - (self.speed)
+        self.state = "moveleft"
+
+    def moveright(self):
+        self.movepos[0] = self.movepos[0] + (self.speed)
+        self.state = "moveright"

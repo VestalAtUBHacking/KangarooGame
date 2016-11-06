@@ -1,6 +1,7 @@
 import pygame
 from kangaroo import kangaroo
 from boomerang import Boomerang
+from background import Background
 
 pygame.init()
 #Sets up the screen
@@ -10,6 +11,8 @@ pygame.display.set_caption('Kangaroo Game')
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((0, 0, 0))
+
+backGround = Background('../assets/img/background.png')
 
 global player1
 global player2
@@ -27,6 +30,7 @@ boomerangsprite = pygame.sprite.RenderPlain(boomerang)
 
 screen.blit(background, (0, 0))
 pygame.display.flip()
+screen.blit(backGround.image, backGround.rect)
 
 clock = pygame.time.Clock()
 
@@ -56,7 +60,7 @@ while not done:
                 player2.moveleft()
             if event.key == pygame.K_RIGHT:
                 player2.moveright()
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x:
                 boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
                 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
                 boomerangsprite.update()
@@ -69,6 +73,7 @@ while not done:
                 player2.movepos = [0,0]
                 player2.state = "still"
 
+    screen.blit(backGround.image, backGround.rect)
     screen.blit(background, boomerang.rect, boomerang.rect)
     screen.blit(background, player1.rect, player1.rect)
     screen.blit(background, player2.rect, player2.rect)

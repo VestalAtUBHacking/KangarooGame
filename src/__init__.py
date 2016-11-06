@@ -4,7 +4,7 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 done = False
 
-kang = pygame.image.load("kangaroo.gif")
+kang = pygame.image.load("../assets/img/Kangaroo.gif")
 kangrect = kang.get_rect()
 
 while not done:

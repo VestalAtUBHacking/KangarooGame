@@ -1,5 +1,6 @@
 import pygame
 from kangaroo import kangaroo
+from boomerang import Boomerang
 
 pygame.init()
 #Sets up the screen
@@ -13,9 +14,13 @@ background.fill((0, 0, 0))
 global player1
 global player2
 
+speed = 13
+boomerang = Boomerang((0, 0), (0.47, speed))
+
 player1 = kangaroo("left")
 player2 = kangaroo("right")
 
+boomerangsprite = pygame.sprite.RenderPlain(boomerang)
 playersprites = pygame.sprite.RenderPlain((player1, player2))
 
 screen.blit(background, (0, 0))
@@ -58,9 +63,12 @@ while not done:
                 player2.state = "still"
 
 
+    screen.blit(background, boomerang.rect, boomerang.rect)
     screen.blit(background, player1.rect, player1.rect)
     screen.blit(background, player2.rect, player2.rect)
     playersprites.update()
+    boomerangsprite.update()
+    boomerangsprite.draw(screen)
     playersprites.draw(screen)
     pygame.display.flip()
 

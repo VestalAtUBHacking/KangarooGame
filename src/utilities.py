@@ -4,9 +4,8 @@ import pygame
 
 def load_png(name):
         """ Load image and return image object"""
-        fullname = os.path.join('data', name)
         try:
-                image = pygame.image.load(fullname)
+                image = pygame.image.load(name)
                 if image.get_alpha is None:
                         image = image.convert()
                 else:

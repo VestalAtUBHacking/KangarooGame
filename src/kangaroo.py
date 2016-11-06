@@ -5,7 +5,7 @@ class kangaroo(pygame.sprite.Sprite):
     
     def __init__(self, side):
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_png('/home/drew/development/kangaroogame/KangarooGame/assets/img/Kangaroo.png')
+        self.image, self.rect = load_png('../assets/img/Kangaroo.png')
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.side = side

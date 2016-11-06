@@ -6,6 +6,8 @@ class Boomerang(pygame.sprite.Sprite):
     and return to the thrower"""
     #Hey that's pretty good
     def __init__(self, speed, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        screen = pygame.display.get_surface()
         self.image, self.rect = load_png('../assets/img/boomerangframe-0.png')
         self.rect.x = x
         self.imageCounter = 0
@@ -14,8 +16,6 @@ class Boomerang(pygame.sprite.Sprite):
         self.orignaly = y
         self.reversed = False
         self.speed = speed
-        pygame.sprite.Sprite.__init__(self)
-        screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.movepos = [self.rect.x,self.rect.y]
         if(self.speed < 1):

@@ -5,7 +5,7 @@ class Boomerang(pygame.sprite.Sprite):
     """A boomerang that will move in a parabolic arc
     and return to the thrower"""
     #Hey that's pretty good
-    def __init__(self, speed, x, y, roo):
+    def __init__(self, speed, x, y):
         self.x = x
         self.y = y
         self.orignalx = x
@@ -19,8 +19,6 @@ class Boomerang(pygame.sprite.Sprite):
         self.movepos = [self.x,self.y]
         self.rect.x = self.x
         self.rect.y = self.y - 20
-        self.roo = roo
-        self.isTouchingOwner = False
 
     def update(self):        
         if self.reversed == True:
@@ -32,6 +30,4 @@ class Boomerang(pygame.sprite.Sprite):
             self.rect.x += 20
             if(self.rect.x >= self.orignalx + 640):
                 self.reversed = True
-
-        self.isTouchingOwner = self.rect.colliderect(self.roo.rect)
         pygame.event.pump()

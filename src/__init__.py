@@ -17,16 +17,17 @@ backGround = Background('../assets/img/background.png')
 global player1
 global player2
 
-player1 = kangaroo("left")
-player2 = kangaroo("right")
-
 speed = 50
-
-playersprites = pygame.sprite.RenderPlain((player1, player2))
-
-boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery, player1)
+boomerang = Boomerang(speed, 50, 360)
 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
 
+player1 = kangaroo("left", boomerang)
+player2 = kangaroo("right", boomerang)
+
+
+
+
+playersprites = pygame.sprite.RenderPlain((player1, player2))
 
 screen.blit(background, (0, 0))
 pygame.display.flip()
@@ -60,8 +61,8 @@ while not done:
                 player2.moveleft()
             if event.key == pygame.K_RIGHT:
                 player2.moveright()
-            if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x and boomerang.isTouchingOwner:
-                boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery, player1)
+            if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x and player1.canShootAgain:
+                boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
                 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
                 boomerangsprite.update()
                 boomerangsprite.draw(screen)

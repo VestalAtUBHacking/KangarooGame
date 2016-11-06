@@ -37,6 +37,8 @@ class kangaroo(pygame.sprite.Sprite):
             self.rect = newpos
         if self.rect.colliderect(self.boom.rect):
             self.canShootAgain = True
+        if self.side == 'right':
+            self.image = pygame.transform.flip(self.image, True, False)
         pygame.event.pump()
 
     def moveup(self):

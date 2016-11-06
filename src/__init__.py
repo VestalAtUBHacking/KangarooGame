@@ -30,8 +30,8 @@ player2 = kangaroo("right", boomerang)
 
 
 
-
 playersprites = pygame.sprite.RenderPlain((player1, player2))
+
 
 screen.blit(background, (0, 0))
 pygame.display.flip()
@@ -63,6 +63,7 @@ while not done:
                 player2.movedown()
             if event.key == pygame.K_LEFT:
                 player2.moveleft()
+                player2.image = pygame.transform.flip(player2.image, False, True)
             if event.key == pygame.K_RIGHT:
                 player2.moveright()
             if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x and player1.canShootAgain:

@@ -14,14 +14,16 @@ background.fill((0, 0, 0))
 global player1
 global player2
 
-speed = 13
-boomerang = Boomerang((0, 0), (0.47, speed))
-
 player1 = kangaroo("left")
 player2 = kangaroo("right")
 
-boomerangsprite = pygame.sprite.RenderPlain(boomerang)
+speed = 5
+
 playersprites = pygame.sprite.RenderPlain((player1, player2))
+
+boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
+boomerangsprite = pygame.sprite.RenderPlain(boomerang)
+
 
 screen.blit(background, (0, 0))
 pygame.display.flip()
@@ -54,6 +56,11 @@ while not done:
                 player2.moveleft()
             if event.key == pygame.K_RIGHT:
                 player2.moveright()
+            if event.key == pygame.K_SPACE:
+                boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
+                boomerangsprite = pygame.sprite.RenderPlain(boomerang)
+                boomerangsprite.update()
+                boomerangsprite.draw(screen)
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_a or event.key == pygame.K_d:
                 player1.movepos = [0,0]
@@ -61,7 +68,6 @@ while not done:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 player2.movepos = [0,0]
                 player2.state = "still"
-
 
     screen.blit(background, boomerang.rect, boomerang.rect)
     screen.blit(background, player1.rect, player1.rect)

@@ -63,6 +63,7 @@ while not done:
                 player2.moveright()
             if event.key == pygame.K_SPACE and boomerang.reversed and boomerang.orignalx == boomerang.rect.x and player1.canShootAgain:
                 boomerang = Boomerang(speed, player1.rect.centerx, player1.rect.centery)
+                player1.canShootAgain = False
                 boomerangsprite = pygame.sprite.RenderPlain(boomerang)
                 boomerangsprite.update()
                 boomerangsprite.draw(screen)
@@ -83,5 +84,6 @@ while not done:
     boomerangsprite.draw(screen)
     playersprites.draw(screen)
     pygame.display.flip()
+    print("CAN I SHOOT: " + str(player1.canShootAgain))
 
 if __name__ == '__main__': main()

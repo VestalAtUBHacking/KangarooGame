@@ -12,7 +12,7 @@ class kangaroo(pygame.sprite.Sprite):
         self.speed = 5
         self.state = "still"
         self.reinit()
-        self.canShootAgain = True
+        self.canShootAgain = False
         self.boom = boomerang
 
     def reinit(self):
